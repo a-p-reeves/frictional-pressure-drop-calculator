@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body style="background-color:white;" onload="calc();">
+        <div style="margin:40px; color:black; background-color:white; font-family:Arial;" width="40%" >
+            <H2>Frictional Pressure Drop Calculator</H2>
+            Single phase, incompressible, newtonian
+            <br>
+            <br>
+            <h3>Input Parameters</h3>
+            <table style="width:50%">
+                <tr>
+                  <td><b>Pipe geometry</b></th>
+                  <td></th>
+                </tr>
+                <tr>
+                  <td><label for="pipe_length">Length (m)</label></td>
+                  <td><input id="pipe_length" type="numbers" value="5000"></td>
+                </tr>
+                <tr>
+                    <td><label for="pipe_diameter">Inner diameter (m)</label></td>
+                    <td><input id="pipe_diameter" type="numbers" value="0.076"></td>
+                </tr>
+                <tr>
+                    <td><label for="pipe_roughness">Equivalent pipe roughness (m)</label></td>
+                    <td><input id="pipe_roughness" type="numbers" value="0.000015"></td>
+                </tr>
+                <tr>
+                    <td><label for="pipe_elevation">Pipe change in elevation (m)</label></td>
+                    <td><input id="pipe_elevation" type="numbers" value="0"></td>
+                </tr>
+                <tr>
+                    <td><b>Fluid Properties</b></th>
+                    <td></th>
+                </tr>
+                <tr>
+                    <td><label for="fluid_v">Fluid velocity (m/s)</label></th>
+                    <td><input id="fluid_v" type="numbers" value="1.32"></th>
+                </tr>
+                <tr>
+                    <td><label for="fluid_density">Fluid density (kg/m3)</label></th>
+                    <td><input id="fluid_density" type="numbers" value="500"></th>
+                </tr>
+                <tr>
+                    <td><label for="fluid_viscosity">Fluid viscosity (Pa*s)</label></th>
+                    <td><input id="fluid_viscosity" type="numbers" value="0.00001"></th>
+                </tr>
+                <tr>
+                    <td><b>Pressure Specifications</b></th>
+                    <td></th>
+                </tr>
+                <tr>
+                    <td><label for="P_in">Inlet pressure (bar)</label></th>
+                    <td><input id="P_in" type="numbers" value="20"></th>
+                </tr>
+                <tr>
+                    <td><label for="P_required">Minimum required pressure at outlet (bar)</label></th>
+                    <td><input id="P_required" type="numbers" value="1"></th>
+                </tr>
+              </table>
+            <br>
+            <br>
+            <button onclick='calc()'>Calculate</button>
+            <button onclick='reload()'>Reset</button>
+            <br>
+            <br>
+            <h3>Results</h3>
+            <div class="float-child" style="width:40%">
+                <div style="padding: 20px; margin:auto; width:100%;"><canvas id="myChart" width="1"></canvas></div>
+            </div>
+            <br>
+            <br>
+            <table style="width:50%">
+                <tr>
+                    <td><label>Reynold's Number:</label></th>
+                    <td id="reynolds"></th>
+                </tr>
+                <tr>
+                    <td><label>Flow Regime:</label></th>
+                    <td id="flow-regime"></th> <!-- 2000 - 4000 transition zone, but assume turbulent -->
+                </tr>
+                <tr>
+                    <td><label>Fanning Friction Factor:</label></th>
+                    <td id="f-output"></th>
+                </tr>
+                <tr>
+                    <td><label>Transmission Factor:</label></th>
+                    <td id="f-transmission"></th>
+                </tr>
+                <tr>
+                    <td><label>Darcy/Moody Friction Factor:</label></th>
+                    <td id="f-dm"></th>
+                </tr>
+                <tr>
+                    <td><label>Pressure drop per m:</label></th>
+                    <td><label id="pdrop-output"></label></th>
+                </tr>
+                <tr>
+                    <td><label><b>Total Pressure Drop:</b></label></th>
+                    <td id="totalp-output"></th>
+                </tr>
+                <tr>
+                    <td><label><b>Pressure at outlet:</b></label></th>
+                    <td id="p_out-output"></th>
+                </tr>
+            </table>
+            <br>
+            <button onclick='printpdf()'>Print Results</button>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
